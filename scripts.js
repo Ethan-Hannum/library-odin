@@ -23,8 +23,8 @@ addBookToLibrary(testBook);
 addBookToLibrary(mazeRunner);
 addBookToLibrary(artOfWar);
 
-function displayBooks() {
-    myLibrary.forEach(function eachBook(book) {
+function displayBooks(array) {
+    array.forEach(function eachBook(book) {
         const card = document.createElement("div");
         card.classList.add("card");
         bookCollection.appendChild(card);
@@ -47,4 +47,4 @@ function displayBooks() {
     }, this)
 }
 
-displayBooks();
+displayBooks(myLibrary);
