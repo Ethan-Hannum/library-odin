@@ -20,6 +20,8 @@ let artOfWar = new Book("Sun Tzu", "The Art of War", "200", "nr");
 
 addBookToLibrary(hungerGames);
 addBookToLibrary(testBook);
+addBookToLibrary(mazeRunner);
+addBookToLibrary(artOfWar);
 
 function displayBooks() {
     myLibrary.forEach(function eachBook(book) {
