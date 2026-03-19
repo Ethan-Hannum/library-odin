@@ -1,5 +1,9 @@
 const myLibrary = [];
 const bookCollection = document.querySelector(".book-collection");
+const newButton = document.querySelector("#new-book");
+const closeButton = document.querySelector("#close-button");
+
+closeButton.addEventListener("click", addBook);
 
 function Book(author, title, pages, status) {
     this.author = author;
@@ -45,6 +49,10 @@ function displayBooks(array) {
         cardStatus.textContent = `${book.status}`;
         card.appendChild(cardStatus);
     }, this)
+}
+
+function addBook() {
+    const bookInfo = document.querySelectorAll("input");
 }
 
 displayBooks(myLibrary);
