@@ -19,7 +19,7 @@
                 </ul>
             </nav>
             <div class="button-bar">
-                <button command="show-modal" commandfor="add-book">New Book</button>
+                <button command="show-modal" commandfor="add-book" id="new-book">New Book</button>
                 <dialog id="add-book">
                     <form action="">
                         <label for="title">Title</label>
@@ -30,7 +30,7 @@
                         <input type="text" name="pages" id="pages">
                         <label for="status">Read?</label>
                         <input type="checkbox" name="status" id="status">
-                        <button type="submit" commandfor="add-book" command="close">Add Book</button>
+                        <button type="submit" commandfor="add-book" command="close" id="close-button">Add Book</button>
                     </form>
                 </dialog>
             </div>
