@@ -2,6 +2,8 @@ const myLibrary = [];
 const bookCollection = document.querySelector(".book-collection");
 const newButton = document.querySelector("#new-book");
 const closeButton = document.querySelector("#close-button");
+const dialog = document.querySelector("#add-book");
+const form = document.querySelector("form");
 
 closeButton.addEventListener("click", addBook);
 
@@ -29,6 +31,9 @@ addBookToLibrary(artOfWar);
 
 function displayBooks(array) {
     array.forEach(function eachBook(book) {
+        if (Object.hasOwn(book, "displayed")) {
+            return;
+        } else {
         const card = document.createElement("div");
         card.classList.add("card");
         bookCollection.appendChild(card);
@@ -48,11 +53,20 @@ function displayBooks(array) {
         const cardStatus = document.createElement("p");
         cardStatus.textContent = `${book.status}`;
         card.appendChild(cardStatus);
+
+        book.displayed = 'yes';
+        }
     }, this)
 }
 
-function addBook() {
-    const bookInfo = document.querySelectorAll("input");
-}
-
 displayBooks(myLibrary);
+
+function addBook(event) {
+    event.preventDefault();
+    const bookInfo = document.querySelectorAll("input");
+    let newBook = new Book(`${bookInfo[1].value}`, `${bookInfo[0].value}`, `${bookInfo[2].value}`, `nr`);
+    myLibrary.push(newBook);
+    displayBooks(myLibrary);
+    dialog.close();
+    form.reset();
+}
