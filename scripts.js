@@ -47,7 +47,7 @@ function displayBooks(array) {
         card.appendChild(cardAuthor);
 
         const cardPages = document.createElement("p");
-        cardPages.textContent = `${book.pages}`;
+        cardPages.textContent = `${book.pages} pages`;
         card.appendChild(cardPages);
 
         const cardStatus = document.createElement("p");
