@@ -20,14 +20,14 @@ function addBookToLibrary(int) {
 }
 
 Book.prototype.changeStatus = function(event) {
-    const parentUUID = this.parentElement.dataset.bookId;
+    const parentUUID = this.parentElement.parentElement.parentElement.dataset.bookId;
     const index = myLibrary.findIndex(book => book.uuid === parentUUID);
     if (myLibrary[index].status === "nr") {
         myLibrary[index].status = "r";
-        this.parentElement.querySelector(".status").textContent = "r";
+        this.parentElement.parentElement.querySelector(".status").textContent = "Read";
     } else {
         myLibrary[index].status = "nr";
-        this.parentElement.querySelector(".status").textContent = "nr";
+        this.parentElement.parentElement.querySelector(".status").textContent = "Not Read";
     }
 }
 
@@ -63,19 +63,31 @@ function displayBooks(array) {
         cardPages.textContent = `${book.pages} pages`;
         card.appendChild(cardPages);
 
+        const bottom = document.createElement("div");
+        bottom.classList.add("bottom");
+        card.appendChild(bottom);
+
         const cardStatus = document.createElement("p");
         cardStatus.classList.add("status");
-        cardStatus.textContent = `${book.status}`;
-        card.appendChild(cardStatus);
+        if (book.status === "nr") {
+            cardStatus.textContent = "Not Read";
+        } else {
+            cardStatus.textContent = "Read"
+        }
+        bottom.appendChild(cardStatus);
+
+        const buttons = document.createElement("div");
+        buttons.classList.add("button-container");
+        bottom.appendChild(buttons);
 
         const statusButton = document.createElement("button");
         statusButton.textContent = "Change read status";
-        card.appendChild(statusButton);
+        buttons.appendChild(statusButton);
         statusButton.addEventListener("click", book.changeStatus);
 
         const cardButton = document.createElement("button");
         cardButton.textContent = "Remove Book";
-        card.appendChild(cardButton);
+        buttons.appendChild(cardButton);
         cardButton.addEventListener("click", removeBook);
 
         book.displayed = 'yes';
@@ -96,8 +108,9 @@ function addBook(event) {
 }
 
 function removeBook(event) {
-    const parentUUID = this.parentElement.dataset.bookId;
+    const pElement = this.parentElement.parentElement.parentElement;
+    const parentUUID = pElement.dataset.bookId;
     const index = myLibrary.findIndex(book => book.uuid === parentUUID);
     myLibrary.splice(index, 1);
-    this.parentElement.remove();
+    pElement.remove();
 }
