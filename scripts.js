@@ -19,6 +19,18 @@ function addBookToLibrary(int) {
     myLibrary.push(int);
 }
 
+Book.prototype.changeStatus = function(event) {
+    const parentUUID = this.parentElement.dataset.bookId;
+    const index = myLibrary.findIndex(book => book.uuid === parentUUID);
+    if (myLibrary[index].status === "nr") {
+        myLibrary[index].status = "r";
+        this.parentElement.querySelector(".status").textContent = "r";
+    } else {
+        myLibrary[index].status = "nr";
+        this.parentElement.querySelector(".status").textContent = "nr";
+    }
+}
+
 let hungerGames = new Book("Suzanne Collins", "The Hunger Games", "500", "r");
 let testBook = new Book("Cool Author", "Cool Book", "1000", "nr");
 let mazeRunner = new Book("James Dashner", "The Maze Runner", "416", "r");
@@ -52,8 +64,14 @@ function displayBooks(array) {
         card.appendChild(cardPages);
 
         const cardStatus = document.createElement("p");
+        cardStatus.classList.add("status");
         cardStatus.textContent = `${book.status}`;
         card.appendChild(cardStatus);
+
+        const statusButton = document.createElement("button");
+        statusButton.textContent = "Change read status";
+        card.appendChild(statusButton);
+        statusButton.addEventListener("click", book.changeStatus);
 
         const cardButton = document.createElement("button");
         cardButton.textContent = "Remove Book";
