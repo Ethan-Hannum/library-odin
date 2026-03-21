@@ -36,6 +36,7 @@ function displayBooks(array) {
         } else {
         const card = document.createElement("div");
         card.classList.add("card");
+        card.dataset.bookId = book.uuid;
         bookCollection.appendChild(card);
 
         const cardTitle = document.createElement("h2");
@@ -54,6 +55,11 @@ function displayBooks(array) {
         cardStatus.textContent = `${book.status}`;
         card.appendChild(cardStatus);
 
+        const cardButton = document.createElement("button");
+        cardButton.textContent = "Remove Book";
+        card.appendChild(cardButton);
+        cardButton.addEventListener("click", removeBook);
+
         book.displayed = 'yes';
         }
     }, this)
@@ -65,8 +71,18 @@ function addBook(event) {
     event.preventDefault();
     const bookInfo = document.querySelectorAll("input");
     let newBook = new Book(`${bookInfo[1].value}`, `${bookInfo[0].value}`, `${bookInfo[2].value}`, `nr`);
-    myLibrary.push(newBook);
+    addBookToLibrary(newBook);
     displayBooks(myLibrary);
     dialog.close();
     form.reset();
+}
+
+function removeBook(event) {
+    const parentUUID = this.parentElement.dataset.bookId;
+    console.log(parentUUID);
+    const index = myLibrary.findIndex(book => book.uuid === parentUUID);
+    console.log(index);
+    myLibrary.splice(index, 1);
+    console.log(myLibrary);
+    this.parentElement.remove();
 }
