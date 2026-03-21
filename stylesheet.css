@@ -60,11 +60,6 @@ main {
     border: 1px solid black;
 }
 
-.layout-container {
-    display: grid;
-    grid-template-rows: 1fr 5fr;
-}
-
 .headers {
     background-color: antiquewhite;
 }
