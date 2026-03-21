@@ -53,15 +53,34 @@ h1, h2, h3, h4, h5, h6 {
   isolation: isolate;
 }
 
-/* Webpage styles begin here */
-
-div,
-main {
-    border: 1px solid black;
+.roboto-font> {
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
 }
 
+/* Webpage styles begin here */
+ 
+body {
+  font-family: Roboto;
+}
+
+.card,
+main {
+    border: 1px solid black;
+    background-color:aliceblue ;
+}
+
+
 .headers {
-    background-color: antiquewhite;
+  background-color: rgb(127, 194, 216);
+}
+
+body {
+    background-color: rgb(173, 211, 223);
 }
 
 nav,
@@ -81,7 +100,33 @@ nav,
     width: 54px;
 }
 
-button {
+.button-bar button {
     height: 32px;
     margin-left: calc(100vw - 132px);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  padding-left: 12px;
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.button-container button {
+  height: 48px;
+  width: 132px;
+}
+
+.status {
+  align-self: flex-end;
+  width: 92px;
 }
