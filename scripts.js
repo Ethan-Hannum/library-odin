@@ -79,10 +79,7 @@ function addBook(event) {
 
 function removeBook(event) {
     const parentUUID = this.parentElement.dataset.bookId;
-    console.log(parentUUID);
     const index = myLibrary.findIndex(book => book.uuid === parentUUID);
-    console.log(index);
     myLibrary.splice(index, 1);
-    console.log(myLibrary);
     this.parentElement.remove();
 }
