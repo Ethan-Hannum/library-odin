@@ -5,7 +5,15 @@ const closeButton = document.querySelector("#close-button");
 const dialog = document.querySelector("#add-book");
 const form = document.querySelector("form");
 
-closeButton.addEventListener("click", addBook);
+class removeBook {
+    handleEvent(event) {
+    const pElement = event.target.parentElement.parentElement.parentElement;
+    const parentUUID = pElement.dataset.bookId;
+    const index = myLibrary.findIndex(book => book.uuid === parentUUID);
+    myLibrary.splice(index, 1);
+    pElement.remove();
+    }
+}
 
 class Book {
     constructor(author, title, pages, status) {
@@ -22,6 +30,7 @@ class addBookToLibrary {
     myLibrary.push(int);
     }
 }
+
 
 Book.prototype.changeStatus = function(event) {
     const parentUUID = this.parentElement.parentElement.parentElement.dataset.bookId;
@@ -93,7 +102,7 @@ class displayBooks {
         const cardButton = document.createElement("button");
         cardButton.textContent = "Remove Book";
         buttons.appendChild(cardButton);
-        cardButton.addEventListener("click", removeBook);
+        cardButton.addEventListener("click", new removeBook());
 
         book.displayed = 'yes';
         }
@@ -101,22 +110,21 @@ class displayBooks {
     }
 }
 
+class addBook {
+    handleEvent(event) {
+        console.log(myLibrary);
+        event.preventDefault();
+        const bookInfo = document.querySelectorAll("input");
+        let newBook = new Book(`${bookInfo[1].value}`, `${bookInfo[0].value}`, `${bookInfo[2].value}`, `nr`);
+        console.log(myLibrary);
+        new addBookToLibrary(newBook);
+        console.log(myLibrary);
+        new displayBooks(myLibrary);
+        dialog.close();
+        form.reset();
+    }
+}
+
 new displayBooks(myLibrary);
 
-function addBook(event) {
-    event.preventDefault();
-    const bookInfo = document.querySelectorAll("input");
-    let newBook = new Book(`${bookInfo[1].value}`, `${bookInfo[0].value}`, `${bookInfo[2].value}`, `nr`);
-    new addBookToLibrary(newBook);
-    new displayBooks(myLibrary);
-    dialog.close();
-    form.reset();
-}
-
-function removeBook(event) {
-    const pElement = this.parentElement.parentElement.parentElement;
-    const parentUUID = pElement.dataset.bookId;
-    const index = myLibrary.findIndex(book => book.uuid === parentUUID);
-    myLibrary.splice(index, 1);
-    pElement.remove();
-}
+closeButton.addEventListener("click", new addBook());
