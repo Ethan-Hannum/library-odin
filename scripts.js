@@ -16,9 +16,11 @@ class Book {
     }
 }
 
-function addBookToLibrary(int) {
+class addBookToLibrary {
+    constructor(int) {
     int.uuid = self.crypto.randomUUID();
     myLibrary.push(int);
+    }
 }
 
 Book.prototype.changeStatus = function(event) {
@@ -38,10 +40,10 @@ let testBook = new Book("Cool Author", "Cool Book", "1000", "nr");
 let mazeRunner = new Book("James Dashner", "The Maze Runner", "416", "r");
 let artOfWar = new Book("Sun Tzu", "The Art of War", "200", "nr");
 
-addBookToLibrary(hungerGames);
-addBookToLibrary(testBook);
-addBookToLibrary(mazeRunner);
-addBookToLibrary(artOfWar);
+new addBookToLibrary(hungerGames);
+new addBookToLibrary(testBook);
+new addBookToLibrary(mazeRunner);
+new addBookToLibrary(artOfWar);
 
 class displayBooks {
     constructor(array) {
@@ -105,7 +107,7 @@ function addBook(event) {
     event.preventDefault();
     const bookInfo = document.querySelectorAll("input");
     let newBook = new Book(`${bookInfo[1].value}`, `${bookInfo[0].value}`, `${bookInfo[2].value}`, `nr`);
-    addBookToLibrary(newBook);
+    new addBookToLibrary(newBook);
     new displayBooks(myLibrary);
     dialog.close();
     form.reset();
