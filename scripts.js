@@ -43,7 +43,8 @@ addBookToLibrary(testBook);
 addBookToLibrary(mazeRunner);
 addBookToLibrary(artOfWar);
 
-function displayBooks(array) {
+class displayBooks {
+    constructor(array) {
     array.forEach(function eachBook(book) {
         if (Object.hasOwn(book, "displayed")) {
             return;
@@ -95,16 +96,17 @@ function displayBooks(array) {
         book.displayed = 'yes';
         }
     }, this)
+    }
 }
 
-displayBooks(myLibrary);
+new displayBooks(myLibrary);
 
 function addBook(event) {
     event.preventDefault();
     const bookInfo = document.querySelectorAll("input");
     let newBook = new Book(`${bookInfo[1].value}`, `${bookInfo[0].value}`, `${bookInfo[2].value}`, `nr`);
     addBookToLibrary(newBook);
-    displayBooks(myLibrary);
+    new displayBooks(myLibrary);
     dialog.close();
     form.reset();
 }
