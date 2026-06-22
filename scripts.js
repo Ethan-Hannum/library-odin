@@ -7,11 +7,13 @@ const form = document.querySelector("form");
 
 closeButton.addEventListener("click", addBook);
 
-function Book(author, title, pages, status) {
-    this.author = author;
-    this.title = title;
-    this.pages = pages;
-    this.status = status;
+class Book {
+    constructor(author, title, pages, status) {
+        this.author = author;
+        this.title = title;
+        this.pages = pages;
+        this.status = status;
+    }
 }
 
 function addBookToLibrary(int) {
